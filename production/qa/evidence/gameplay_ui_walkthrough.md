@@ -1,4 +1,4 @@
 # Gameplay UI Walkthrough
-- [ ] Queue panel shows front 3 rows
-- [ ] Waiting slots show 5 slots
-- [ ] Clicking available unit enqueues to conveyor
+- [x] Queue panel shows front 3 rows
+- [x] Waiting slots show 5 slots
+- [x] Clicking available unit enqueues to conveyor

@@ -1,4 +1,4 @@
 # Level Editor Walkthrough
-- [ ] Place building with color + layer
-- [ ] Edit queue columns
-- [ ] Run simulation step and see waiting slots
+- [x] Place building with color + layer
+- [x] Edit queue columns
+- [x] Run simulation step and see waiting slots
