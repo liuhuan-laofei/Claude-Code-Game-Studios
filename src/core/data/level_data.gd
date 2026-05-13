@@ -23,10 +23,27 @@ static func load(path: String) -> Dictionary:
 static func save(path: String, level: Dictionary) -> void:
 	var base_dir := path.get_base_dir()
 	if base_dir != "":
-		DirAccess.make_dir_recursive_absolute(base_dir)
+		var root := ""
+		var relative := ""
+		if base_dir.begins_with("res://"):
+			root = "res://"
+			relative = base_dir.trim_prefix("res://")
+		elif base_dir.begins_with("user://"):
+			root = "user://"
+			relative = base_dir.trim_prefix("user://")
+		if root == "":
+			DirAccess.make_dir_recursive_absolute(base_dir)
+		else:
+			var dir := DirAccess.open(root)
+			if dir == null:
+				push_error("LevelData.save: failed to open dir: %s" % root)
+				return
+			if relative != "":
+				dir.make_dir_recursive(relative)
 
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
+		push_error("LevelData.save: failed to write file: %s" % path)
 		return
 
 	var text := JSON.stringify(level, "\t")
