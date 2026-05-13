@@ -1,4 +1,5 @@
 ## Holds deterministic simulation state for gameplay steps.
+## Attackable building selection is owned by SimulationState for data-driven access.
 class_name SimulationState
 extends RefCounted
 
