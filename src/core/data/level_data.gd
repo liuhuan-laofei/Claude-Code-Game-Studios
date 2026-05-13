@@ -1,6 +1,9 @@
+## Loads level data and validates it with minimal schema checks.
+## ADR: docs/architecture/ADR-0001-level-data-schema-validation.md
 class_name LevelData
 extends RefCounted
 
+## Validates schema and level JSON by verifying both files load and pass checks.
 static func validate_schema(schema_path: String, level_path: String) -> Dictionary:
 	var schema_data := _load_json(schema_path)
 	if schema_data.is_empty():
@@ -10,7 +13,27 @@ static func validate_schema(schema_path: String, level_path: String) -> Dictiona
 	if level_data.is_empty():
 		return {"is_valid": false, "errors": ["level load failed"]}
 
-	return {"is_valid": true, "errors": []}
+	return validate_schema_data(schema_data, level_data)
+
+## Validates schema and level data without file I/O.
+static func validate_schema_data(schema_data: Dictionary, level_data: Dictionary) -> Dictionary:
+	var errors: Array = []
+	var required := schema_data.get("required", [])
+	for key in required:
+		if not level_data.has(key):
+			errors.append("missing required: %s" % key)
+
+	var properties := schema_data.get("properties", {})
+	for key in properties.keys():
+		if not level_data.has(key):
+			continue
+		var expected_type := properties[key].get("type", "")
+		if expected_type == "" :
+			continue
+		if not _matches_type(level_data[key], expected_type):
+			errors.append("type mismatch: %s" % key)
+
+	return {"is_valid": errors.is_empty(), "errors": errors}
 
 static func _load_json(path: String) -> Dictionary:
 	var file := FileAccess.open(path, FileAccess.READ)
@@ -23,3 +46,20 @@ static func _load_json(path: String) -> Dictionary:
 		return {}
 
 	return data
+
+static func _matches_type(value: Variant, expected_type: String) -> bool:
+	match expected_type:
+		"string":
+			return typeof(value) == TYPE_STRING
+		"number":
+			return typeof(value) == TYPE_INT or typeof(value) == TYPE_FLOAT
+		"integer":
+			return typeof(value) == TYPE_INT
+		"array":
+			return typeof(value) == TYPE_ARRAY
+		"object":
+			return typeof(value) == TYPE_DICTIONARY
+		"boolean":
+			return typeof(value) == TYPE_BOOL
+		_:
+			return true
