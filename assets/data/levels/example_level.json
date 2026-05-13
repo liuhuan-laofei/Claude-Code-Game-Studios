@@ -1,5 +1,6 @@
 {
   "id": "example_level",
   "name": "Example Level",
-  "waves": []
+  "waves": [],
+  "waiting_slots": 5
 }
