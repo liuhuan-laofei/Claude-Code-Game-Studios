@@ -2,5 +2,16 @@
   "id": "example_level",
   "name": "Example Level",
   "waves": [],
-  "waiting_slots": 5
+  "waiting_slots": 5,
+  "front_rows_visible": 3,
+  "columns": [
+    {
+      "id": "A",
+      "units": ["A1", "A2", "A3", "A4"]
+    },
+    {
+      "id": "B",
+      "units": ["B1", "B2", "B3", "B4"]
+    }
+  ]
 }

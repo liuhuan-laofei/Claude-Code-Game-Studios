@@ -18,8 +18,31 @@
     "waiting_slots": {
       "type": "integer",
       "minimum": 0
+    },
+    "front_rows_visible": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "units": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["id", "units"],
+        "additionalProperties": false
+      }
     }
   },
-  "required": ["id", "name", "waves", "waiting_slots"],
+  "required": ["id", "name", "waves", "waiting_slots", "front_rows_visible", "columns"],
   "additionalProperties": false
 }
