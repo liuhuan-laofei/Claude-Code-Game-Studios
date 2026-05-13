@@ -15,6 +15,10 @@ static func validate_schema(schema_path: String, level_path: String) -> Dictiona
 
 	return validate_schema_data(schema_data, level_data)
 
+## Loads level JSON data from disk.
+static func load(path: String) -> Dictionary:
+	return _load_json(path)
+
 ## Validates schema and level data without file I/O.
 static func validate_schema_data(schema_data: Dictionary, level_data: Dictionary) -> Dictionary:
 	var errors: Array = []
