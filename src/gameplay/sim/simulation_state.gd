@@ -98,5 +98,9 @@ func get_attackable_buildings(color: String) -> Array:
 			attackable.append(entry)
 	return attackable
 
+## Returns true when waiting slots have reached failure limits.
+func is_failed() -> bool:
+	return waiting_slots.size() >= max_waiting_slots
+
 func _make_queue_key(column_id: String, index: int) -> String:
 	return "%s:%d" % [column_id, index]
