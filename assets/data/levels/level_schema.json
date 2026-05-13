@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Level Data",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "waves": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "waiting_slots": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "front_rows_visible": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "units": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["id", "units"],
+        "additionalProperties": false
+      }
+    },
+    "buildings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string"
+          },
+          "layer_depth": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "position": {
+            "type": "object"
+          }
+        },
+        "required": ["color", "layer_depth"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["id", "name", "waves", "waiting_slots", "front_rows_visible", "columns", "buildings"],
+  "additionalProperties": false
+}

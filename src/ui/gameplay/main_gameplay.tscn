@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://djecbo25v3elw"]
+
+[ext_resource type="Script" uid="uid://dap48btw0j0w7" path="res://src/ui/gameplay/main_gameplay.gd" id="1"]
+[ext_resource type="PackedScene" path="res://src/ui/gameplay/components/queue_panel.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://src/ui/gameplay/components/grid_view.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://src/ui/gameplay/components/waiting_slots_panel.tscn" id="4"]
+
+[node name="MainGameplay" type="Control" unique_id=915544757]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1")
+
+[node name="RootMargin" type="MarginContainer" parent="." unique_id=1373703857]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panels" type="HBoxContainer" parent="RootMargin" unique_id=1535957463]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="QueuePanel" parent="RootMargin/Panels" unique_id=868389954 instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="GridView" parent="RootMargin/Panels" unique_id=1691266133 instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="WaitingSlotsPanel" parent="RootMargin/Panels" unique_id=1872428933 instance=ExtResource("4")]
+layout_mode = 2
